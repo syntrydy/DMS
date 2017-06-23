@@ -1,0 +1,404 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+	<changeSet id="SGS-001" author="gasmyr.mougang">
+		<createTable tableName="utilisateur">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="user_pkey"
+					nullable="false" />
+			</column>
+			<column name="title" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="fname" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="lname" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="phone" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="email" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="address" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="cni" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="kind" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="username" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="password" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="can_login" type="bool" defaultValue="false" />
+			<column name="version" type="int8" />
+		</createTable>
+		<insert tableName="utilisateur">
+			<column name="title" value="M" />
+			<column name="fname" value="Thomas Gasmyr" />
+			<column name="lname" value="Mougang" />
+			<column name="phone" value="+237 696534361" />
+			<column name="email" value="gasmyrmougang@yahoo.fr" />
+			<column name="username" value="admin" />
+			<column name="password" value="admin" />
+			<column name="can_login" value="true" />
+			<column name="address" value="Ouest/Bangangté" />
+			<column name="cni" value="CNI-OU1234" />
+			<column name="kind" value="teacher" />
+			<column name="version" value="0" />
+		</insert>
+		<insert tableName="utilisateur">
+			<column name="title" value="Mme" />
+			<column name="fname" value="Ulrielle" />
+			<column name="lname" value="Fouemetre" />
+			<column name="phone" value="+237 69865432" />
+			<column name="email" value="ufouemetre@yahoo.fr" />
+			<column name="username" value="ulrielle" />
+			<column name="password" value="ulrielle" />
+			<column name="can_login" value="true" />
+			<column name="address" value="Centre/Bastos" />
+			<column name="cni" value="CNI-YA1804" />
+			<column name="kind" value="teacher" />
+			<column name="version" value="0" />
+		</insert>
+		<insert tableName="utilisateur">
+			<column name="fname" value="Roline" />
+			<column name="lname" value="Mbe" />
+			<column name="phone" value="+237 672518192" />
+			<column name="email" value="gasmyrela@yahoo.fr" />
+			<column name="username" value="roline" />
+			<column name="password" value="roline" />
+			<column name="can_login" value="true" />
+			<column name="cni" value="CNI-OU4578" />
+			<column name="kind" value="student" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-002" author="gasmyr.mougang">
+		<createTable tableName="university">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="university_pkey"
+					nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="fax" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="location" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="version" type="int8" />
+		</createTable>
+		<insert tableName="university">
+			<column name="name" value="IUT-FV of Bandjoun" />
+			<column name="fax" value="+237 161 999 8888" />
+			<column name="location" value="Cameroun/Ouest" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-003" author="gasmyr.mougang">
+		<createTable tableName="department">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="department_pkey"
+					nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="owner_id" type="int8" />
+			<column name="version" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="owner_id"
+			baseTableName="department" baseTableSchemaName="public"
+			constraintName="fk_department_university_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="university"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<insert tableName="department">
+			<column name="name" value="Information Technology" />
+			<column name="description" value="Information Technology related studies" />
+			<column name="owner_id"
+				valueComputed="(SELECT id FROM university WHERE name='IUT-FV of Bandjoun')" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-004" author="gasmyr.mougang">
+		<createTable tableName="field">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="field_pkey"
+					nullable="false" />
+			</column>
+			<column name="code" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="department_id" type="int8" />
+			<column name="version" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="department_id"
+			baseTableName="field" baseTableSchemaName="public" constraintName="fk_field_department_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="department"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<insert tableName="field">
+			<column name="name" value="Computer Science" />
+			<column name="code" value="CS" />
+			<column name="description" value="Using computer to solve enterprise issues" />
+			<column name="department_id"
+				valueComputed="(SELECT id FROM department WHERE name='Information Technology')" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-005" author="gasmyr.mougang">
+		<createTable tableName="option">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="option_pkey"
+					nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="code" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="description" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="field_id" type="int8" />
+			<column name="version" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="field_id"
+			baseTableName="option" baseTableSchemaName="public" constraintName="fk_foption_field_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="field"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<insert tableName="option">
+			<column name="name" value="Machine Learning" />
+			<column name="code" value="ML" />
+			<column name="description"
+				value="Subfield of AI design to give computer ability to learn from experience" />
+			<column name="field_id"
+				valueComputed="(SELECT id FROM field WHERE name='Computer Science')" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-006" author="gasmyr.mougang">
+		<createTable tableName="level">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="level_pkey"
+					nullable="false" />
+			</column>
+			<column name="code" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="option_id" type="int8" />
+			<column name="version" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="option_id"
+			baseTableName="level" baseTableSchemaName="public" constraintName="fk_level_option_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="option"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<insert tableName="level">
+			<column name="name" value="Level One" />
+			<column name="code" value="L1" />
+			<column name="option_id" valueComputed="(SELECT id FROM option WHERE code='ML')" />
+			<column name="version" value="0" />
+		</insert>
+		<insert tableName="level">
+			<column name="name" value="Level Two" />
+			<column name="code" value="L2" />
+			<column name="option_id" valueComputed="(SELECT id FROM option WHERE code='ML')" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-007" author="gasmyr.mougang">
+		<createTable tableName="facility">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="facility_pkey"
+					nullable="false" />
+			</column>
+			<column name="code" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="true" />
+			</column>
+			<column name="available" type="bool" defaultValue="false" />
+			<column name="version" type="int8" />
+		</createTable>
+		<insert tableName="facility">
+			<column name="name" value="Amphi_300" />
+			<column name="code" value="A300" />
+			<column name="available" value="true" />
+			<column name="version" value="0" />
+		</insert>
+		<insert tableName="facility">
+			<column name="name" value="Amphi_Theatre" />
+			<column name="code" value="AM_TH" />
+			<column name="available" value="false" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-008" author="gasmyr.mougang">
+		<createTable tableName="jury">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="jury_pkey"
+					nullable="false" />
+			</column>
+			<column name="name" type="varchar(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="version" type="int8" />
+		</createTable>
+		<insert tableName="jury">
+			<column name="name" value="Jury I" />
+			<column name="version" value="0" />
+		</insert>
+		<insert tableName="jury">
+			<column name="name" value="Jury II" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-009" author="gasmyr.mougang">
+		<createTable tableName="jury_teacher">
+			<column name="jury_id" type="int8" />
+			<column name="teacher_id" type="int8" />
+			<column name="version" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="jury_id"
+			baseTableName="jury_teacher" baseTableSchemaName="public"
+			constraintName="fk_jury_teacher_jury_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="jury"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<insert tableName="jury_teacher">
+			<column name="jury_id" valueComputed="(SELECT id FROM jury WHERE name='Jury I')" />
+			<column name="teacher_id"
+				valueComputed="(SELECT id FROM utilisateur WHERE username='admin')" />
+			<column name="version" value="0" />
+		</insert>
+		<insert tableName="jury_teacher">
+			<column name="jury_id" valueComputed="(SELECT id FROM jury WHERE name='Jury I')" />
+			<column name="teacher_id"
+				valueComputed="(SELECT id FROM utilisateur WHERE username='ulrielle')" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-010" author="gasmyr.mougang">
+		<createTable tableName="defense">
+			<column autoIncrement="true" name="id" type="int8">
+				<constraints primaryKey="true" primaryKeyName="defense_pkey"
+					nullable="false" />
+			</column>
+			<column name="schoolyear" type="DATE" />
+			<column name="date" type="DATETIME" />
+			<column name="university_id" type="int8" />
+			<column name="department_id" type="int8" />
+			<column name="field_id" type="int8" />
+			<column name="option_id" type="int8" />
+			<column name="level_id" type="int8" />
+			<column name="facility_id" type="int8" />
+			<column name="jury_id" type="int8" />
+			<column name="version" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="university_id"
+			baseTableName="defense" baseTableSchemaName="public"
+			constraintName="fk_defense_university_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="university"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="department_id"
+			baseTableName="defense" baseTableSchemaName="public"
+			constraintName="fk_defense_department_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="department"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="field_id"
+			baseTableName="defense" baseTableSchemaName="public" constraintName="fk_defense_field_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="field"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="option_id"
+			baseTableName="defense" baseTableSchemaName="public" constraintName="fk_defense_option_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="option"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="level_id"
+			baseTableName="defense" baseTableSchemaName="public" constraintName="fk_defense_level_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="level"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="facility_id"
+			baseTableName="defense" baseTableSchemaName="public" constraintName="fk_defense_facility_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="facility"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="jury_id"
+			baseTableName="defense" baseTableSchemaName="public" constraintName="fk_defense_jury_id"
+			deferrable="false" initiallyDeferred="false" onDelete="NO ACTION"
+			onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="jury"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<insert tableName="defense">
+			<column name="date" value="2017-07-15 16:30:00" />
+			<column name="schoolyear" value="2017-07-15" />
+			<column name="university_id"
+				valueComputed="(SELECT id FROM university WHERE name='IUT-FV of Bandjoun')" />
+			<column name="department_id"
+				valueComputed="(SELECT id FROM department WHERE name='Information Technology')" />
+			<column name="field_id" valueComputed="(SELECT id FROM field WHERE code='CS')" />
+			<column name="option_id" valueComputed="(SELECT id FROM option WHERE code='ML')" />
+			<column name="level_id" valueComputed="(SELECT id FROM level WHERE code='L2')" />
+			<column name="facility_id" valueComputed="(SELECT id FROM facility WHERE code='A300')" />
+			<column name="jury_id" valueComputed="(SELECT id FROM jury WHERE name='Jury I')" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+	<changeSet id="SGS-011" author="gasmyr.mougang">
+		<createTable tableName="defense_student">
+			<column name="defense_id" type="int8" />
+			<column name="student_id" type="int8" />
+			<column name="version" type="int8" />
+		</createTable>
+		<addForeignKeyConstraint baseColumnNames="defense_id"
+			baseTableName="defense_student" baseTableSchemaName="public"
+			constraintName="fk_defense_student_defense_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="defense"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<addForeignKeyConstraint baseColumnNames="student_id"
+			baseTableName="defense_student" baseTableSchemaName="public"
+			constraintName="fk_defense_student_student_id" deferrable="false"
+			initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+			referencedColumnNames="id" referencedTableName="utilisateur"
+			referencedTableSchemaName="public" referencesUniqueColumn="false" />
+		<insert tableName="defense_student">
+			<column name="defense_id"
+				valueComputed="(SELECT id FROM defense WHERE date='2017-07-15 16:30:00')" />
+			<column name="student_id"
+				valueComputed="(SELECT id FROM utilisateur WHERE username='roline')" />
+			<column name="version" value="0" />
+		</insert>
+	</changeSet>
+</databaseChangeLog>
