@@ -34,16 +34,17 @@ public class AuthenticationController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String signIn(@Valid UiUser uiUser, BindingResult bindingResult) {
-		//List<User> users = userService.searchByUserName(uiUser.getUsername());
-		//if (users.size() == 1 && users.get(0).getPasswd().equalsIgnoreCase(uiUser.getPassword())) {
+		List<User> users = userService.searchByUserName(uiUser.getUsername());
+		if (users.size() == 1 && users.get(0).getPasswd().equalsIgnoreCase(uiUser.getPassword())) {
 			return "redirect:/home";
-		//} else {
-		//	return "redirect:/";
-		//}
+		} else {
+			return "redirect:/";
+		}
 	}
+
 	@GetMapping("/403")
-    public String error403() {
-        return "/error/403";
-    }
+	public String error403() {
+		return "/error/403";
+	}
 
 }

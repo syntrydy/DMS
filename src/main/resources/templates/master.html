@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:fragment="app_header">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -21,7 +20,7 @@
 				<a href="#" data-activates="slide-out" class="brand-logo"><i
 					class="material-icons">cloud</i>DPS</a>
 				<ul class="right hide-on-med-and-down">
-					<li><a href="/departments" sec:authorize="hasRole('ADMIN')">Departments</a></li>
+					<li><a href="/departments">Departments</a></li>
 					<li><a href="/fields">Fields</a></li>
 					<li><a href="/options">Options</a></li>
 					<li><a href="/levels">Levels</a></li>
