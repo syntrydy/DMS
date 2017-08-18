@@ -13,15 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cm.gasmyr.mougang.it.sgs.core.Department;
 import cm.gasmyr.mougang.it.sgs.impl.service.DepartmentService;
+import cm.gasmyr.mougang.it.sgs.impl.service.UniversityService;
 
 @Controller
 public class DepartmentController {
 
 	private DepartmentService departmentService;
+	private UniversityService universityService;
 
 	@Autowired
-	public DepartmentController(DepartmentService departmentService) {
+	public DepartmentController(DepartmentService departmentService, UniversityService universityService) {
 		this.departmentService = departmentService;
+		this.universityService = universityService;
 	}
 
 	@RequestMapping("/departments")
@@ -34,6 +37,7 @@ public class DepartmentController {
 	public String goToDepartmentEditPage(Model model, @PathVariable Long id) {
 		Department department = departmentService.getById(id);
 		model.addAttribute("department", department);
+		model.addAttribute("univs", universityService.getAll());
 		return "DepartmentEditPage";
 	}
 
@@ -48,13 +52,14 @@ public class DepartmentController {
 	@RequestMapping(value = "/delete_department/{id}")
 	public String deleteDepartment(@Valid Department option, BindingResult bindingResult, @PathVariable Long id) {
 		Department departmentToBeDeleted = departmentService.getById(id);
-		departmentService.delete(departmentToBeDeleted);
+		departmentService.delete(departmentToBeDeleted.getId());
 		return "redirect:/departments";
 	}
 
 	@GetMapping(value = "/department")
 	public String gotoAddPage(Model model) {
 		model.addAttribute("department", new Department());
+		model.addAttribute("univs", universityService.getAll());
 		return "DepartmentAddPage";
 	}
 

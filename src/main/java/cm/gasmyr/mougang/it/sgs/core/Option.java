@@ -2,7 +2,6 @@ package cm.gasmyr.mougang.it.sgs.core;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
-import static javax.persistence.CascadeType.REMOVE;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +20,7 @@ public class Option {
 	private String code;
 	private String name;
 	private String description;
-	@ManyToOne(cascade = { PERSIST, REFRESH, REMOVE })
+	@ManyToOne(cascade = { PERSIST, REFRESH })
 	private Field field;
 	@Version
 	private int version;
@@ -60,6 +59,10 @@ public class Option {
 
 	public Field getField() {
 		return field;
+	}
+	
+	public String getFieldName() {
+		return field.getName();
 	}
 
 	public void setField(Field field) {

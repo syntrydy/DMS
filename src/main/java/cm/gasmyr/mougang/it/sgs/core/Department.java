@@ -2,7 +2,6 @@ package cm.gasmyr.mougang.it.sgs.core;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
-import static javax.persistence.CascadeType.REMOVE;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class Department {
 	private Long id;
 	private String name;
 	private String description;
-	@ManyToOne(cascade = { PERSIST, REFRESH, REMOVE })
+	@ManyToOne(cascade = { PERSIST, REFRESH})
 	private University owner;
 	@OneToMany(mappedBy = "department")
 	private List<Field> fields;
@@ -56,6 +55,10 @@ public class Department {
 
 	public Long getId() {
 		return id;
+	}
+
+	public String getUniversityName() {
+		return this.owner.getName();
 	}
 
 	public void updateInternal(Department department) {

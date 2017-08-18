@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="master :: app_header" />
+
+<body class="">
+	<div th:replace="master :: app_navbar"></div>
+
+	<div class="row card main">
+		<div class="col s12 m12">
+			<table class="table">
+				<thead class="myborderraduis">
+					<tr class="black-text">
+						<th>First Name</th>
+						<th>Last Name</th>
+						<th>CNI</th>
+						<th>UserName</th>
+						<th>Phone</th>
+						<th>Email</th>
+						<th>Actions 
+						<a href="/student"
+							class="btn btn-floating pulse addButton"><i
+								class="material-icons">add</i></a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="student : ${students}">
+						<td th:text="${student.fname}"></td>
+						<td th:text="${student.lname}"></td>
+						<td th:text="${student.cni}"></td>
+						<td th:text="${student.username}"></td>
+						<td th:text="${student.phone}"></td>
+						<td th:text="${student.email}"></td>
+						<td><a th:href="@{/edit_student/{id}(id=${student.id})}"><button
+									type="button" class="btn btn-primary">
+									<i class="material-icons left">edit</i>
+								</button></a> <a th:href="@{/delete_student/{id}(id=${student.id})}"><button
+									type="button" class="btn btn-danger">
+									<i class="material-icons left">delete</i>
+								</button></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+
+
+</body>
+<footer th:replace="master :: app_footer"></footer>
+</html>

@@ -11,4 +11,7 @@ import cm.gasmyr.mougang.it.sgs.core.User;
 public interface UserRepo extends JpaRepository<User, Long> {
 	@Query("Select u from User u where u.lname like %:text%")
 	List<User> findUser(@Param("text") String text);
+	
+	@Query("Select u from User u where u.username =:name")
+	List<User> findUserWith(@Param("name") String text);
 }

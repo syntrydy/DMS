@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="master :: app_header" />
+
+<body class="">
+	<div th:replace="master :: app_navbar"></div>
+
+	<div class="row card main">
+		<div class="col s12 m12">
+			<table class="table">
+				<thead class="myborderraduis">
+					<tr class="black-text">
+						<th>Name</th>
+						<th>Description</th>
+						<th>University</th>
+						<th>Actions
+						<a href="/department" class="btn btn-floating pulse addButton"><i class="material-icons">add</i></a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="department : ${departments}">
+						<td th:text="${department.name}"></td>
+						<td th:text="${department.description}"></td>
+						<td th:text="${department.getUniversityName()}"></td>
+						<td><a
+							th:href="@{/edit_department/{id}(id=${department.id})}"><button
+									type="button" class="btn btn-primary">
+									<i class="material-icons left">edit</i>Modify
+								</button></a> <a th:href="@{/delete_department/{id}(id=${department.id})}"><button
+									type="button" class="btn btn-danger">
+									<i class="material-icons left">delete</i>Delete
+								</button></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+
+
+</body>
+<footer th:replace="master :: app_footer"></footer>
+</html>

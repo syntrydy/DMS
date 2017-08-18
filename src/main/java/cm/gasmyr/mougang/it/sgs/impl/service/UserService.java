@@ -28,4 +28,6 @@ public interface UserService {
 	public void update(Long b);
 
 	List<User> searchByTest(String text);
+	
+	List<User> searchByUserName(String text);
 }

@@ -2,7 +2,6 @@ package cm.gasmyr.mougang.it.sgs.core;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
-import static javax.persistence.CascadeType.REMOVE;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class Field {
 	private String code;
 	private String name;
 	private String description;
-	@ManyToOne(cascade = { PERSIST, REFRESH, REMOVE })
+	@ManyToOne(cascade = { PERSIST, REFRESH })
 	private Department department;
 	@OneToMany(mappedBy = "field")
 	private List<Option> options;
@@ -67,6 +66,15 @@ public class Field {
 		return department;
 	}
 
+	public String getDepartmentName() {
+		if (department != null) {
+			return department.getName();
+		} else {
+			return "----";
+		}
+
+	}
+
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
@@ -75,6 +83,7 @@ public class Field {
 		this.name = field.getName();
 		this.code = field.getCode();
 		this.description = field.getDescription();
+		this.department = field.getDepartment();
 		this.department = field.getDepartment();
 	}
 

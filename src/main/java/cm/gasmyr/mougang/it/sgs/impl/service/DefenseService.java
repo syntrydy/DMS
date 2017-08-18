@@ -11,7 +11,7 @@ import cm.gasmyr.mougang.it.sgs.core.Defense;
 @Service
 public interface DefenseService {
 
-	public void add(Defense defense);
+	public boolean add(Defense defense);
 
 	public void delete(Defense student);
 

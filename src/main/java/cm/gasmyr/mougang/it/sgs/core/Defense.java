@@ -52,7 +52,7 @@ public class Defense {
 	@JoinColumn(name = "facility_id", referencedColumnName = "id")
 	private Facility facility = new Facility();
 	@OneToOne(cascade = { PERSIST, MERGE, REFRESH })
-	@JoinColumn(name = "jury", referencedColumnName = "id")
+	@JoinColumn(name = "jury_id", referencedColumnName = "id")
 	private Jury jury = new Jury();
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "defense_student", joinColumns = { @JoinColumn(name = "defense_id") }, inverseJoinColumns = {
@@ -85,12 +85,20 @@ public class Defense {
 		return department;
 	}
 
+	public String getDepartmentName() {
+		return department.getName();
+	}
+
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
 
 	public Field getField() {
 		return field;
+	}
+
+	public String getFieldName() {
+		return field.getName();
 	}
 
 	public void setField(Field field) {
@@ -101,12 +109,20 @@ public class Defense {
 		return level;
 	}
 
+	public String getLevelName() {
+		return level.getName();
+	}
+
 	public void setLevel(Level level) {
 		this.level = level;
 	}
 
 	public Option getOption() {
 		return option;
+	}
+
+	public String getOptionName() {
+		return option.getName();
 	}
 
 	public void setOption(Option option) {
@@ -117,12 +133,26 @@ public class Defense {
 		return facility;
 	}
 
+	public String getFacilityName() {
+		return facility.getName();
+	}
+
 	public void setFacility(Facility facility) {
 		this.facility = facility;
 	}
 
 	public Jury getJury() {
 		return jury;
+	}
+
+	public String getJuryName() {
+		if (jury != null) {
+			return jury.getName();
+		}
+		else{
+			return "----------";
+		}
+		
 	}
 
 	public void setJury(Jury jury) {

@@ -10,6 +10,14 @@ main {
 	flex: 1 0 auto;
 }
 
+.login {
+	margin-left: 30%;
+	margin-right: 30%;
+	margin-top: 5%;
+	background: #37474f;
+	border-radius: 15px;
+}
+
 .myfooter {
 	position: fixed;
 	bottom: 0;
@@ -40,3 +48,9 @@ main {
 	float: right;
 	background: #900;
 }
+
+$(
+document ).ready (function() { $('select ').material_select();
+	
+}
+);

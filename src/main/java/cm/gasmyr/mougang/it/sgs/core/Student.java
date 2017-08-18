@@ -2,7 +2,6 @@ package cm.gasmyr.mougang.it.sgs.core;
 
 import static javax.persistence.CascadeType.PERSIST;
 import static javax.persistence.CascadeType.REFRESH;
-import static javax.persistence.CascadeType.REMOVE;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -14,7 +13,7 @@ import javax.persistence.Table;
 @DiscriminatorValue("student")
 public class Student extends User {
 	private String cni;
-	@ManyToOne(cascade = { PERSIST, REFRESH, REMOVE })
+	@ManyToOne(cascade = { PERSIST, REFRESH })
 	private Jury jury;
 
 	public String getCni() {

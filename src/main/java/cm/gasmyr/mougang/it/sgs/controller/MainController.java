@@ -28,12 +28,12 @@ public class MainController {
 		return "master";
 	}
 
-	@RequestMapping({ "/", "/home" })
+	@RequestMapping({ "/home" })
 	public String goToHomePage() {
 		return "home";
 	}
 
-	@RequestMapping(value="/settings",method = RequestMethod.GET)
+	@RequestMapping(value = "/settings", method = RequestMethod.GET)
 	public String goToSettingsPage(Model model) {
 		University current = universityService.getAll().get(0);
 		model.addAttribute("university", current);

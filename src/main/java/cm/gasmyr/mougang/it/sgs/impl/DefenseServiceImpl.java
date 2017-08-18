@@ -22,8 +22,14 @@ public class DefenseServiceImpl implements DefenseService {
 	}
 
 	@Override
-	public void add(Defense defense) {
-		defenseRepo.save(defense);
+	public boolean add(Defense defense) {
+		try{
+			defenseRepo.save(defense);
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
+		
 	}
 
 	@Override

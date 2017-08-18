@@ -12,17 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import cm.gasmyr.mougang.it.sgs.core.Option;
+import cm.gasmyr.mougang.it.sgs.impl.service.FieldService;
 import cm.gasmyr.mougang.it.sgs.impl.service.OptionService;
+
 @Controller
 public class OptionController {
-	
+
 	private OptionService optionService;
+	private FieldService fieldService;
 
 	@Autowired
-	public OptionController(OptionService optionService) {
+	public OptionController(OptionService optionService, FieldService fieldService) {
 		this.optionService = optionService;
+		this.fieldService = fieldService;
 	}
-	
+
 	@RequestMapping("/options")
 	public String goToOptionListPage(Model model) {
 		model.addAttribute("options", optionService.getAll());
@@ -33,6 +37,7 @@ public class OptionController {
 	public String goToOptionEditPage(Model model, @PathVariable Long id) {
 		Option option = optionService.getById(id);
 		model.addAttribute("option", option);
+		model.addAttribute("fields", fieldService.getAll());
 		return "OptionEditPage";
 	}
 
@@ -54,6 +59,7 @@ public class OptionController {
 	@GetMapping(value = "/option")
 	public String gotoAddPage(Model model) {
 		model.addAttribute("option", new Option());
+		model.addAttribute("fields", fieldService.getAll());
 		return "OptionAddPage";
 	}
 

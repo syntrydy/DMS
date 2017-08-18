@@ -66,4 +66,8 @@ public class University {
 		this.location = university.getLocation();
 	}
 
+	public void setId(long l) {
+		this.id = l;
+	}
+
 }

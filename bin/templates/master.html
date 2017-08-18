@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:fragment="app_header">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -19,15 +19,19 @@
 		<nav>
 			<div class="nav-wrapper back">
 				<a href="#" data-activates="slide-out" class="brand-logo"><i
-					class="material-icons">cloud</i>SGS</a>
+					class="material-icons">cloud</i>DPS</a>
 				<ul class="right hide-on-med-and-down">
-					<li><a href="/departments">Departments</a></li>
+					<li><a href="/departments" sec:authorize="hasRole('ADMIN')">Departments</a></li>
+					<li><a href="/fields">Fields</a></li>
+					<li><a href="/options">Options</a></li>
+					<li><a href="/levels">Levels</a></li>
 					<li><a href="/students">Students</a></li>
 					<li><a href="/teachers">Teachers</a></li>
 					<li><a href="/facilities">Facilities</a></li>
-					<li><a href="/planing">Planing</a></li>
-					<li><a href="/settings">Settings</a></li>
-					<li><a href="/logout"><i class="material-icons">input</i></a></li>
+					<li><a href="/juries">Juries</a></li>
+					<li><a href="/defenses">Defenses</a></li>
+					<!-- 					<li><a href="/settings">Settings</a></li> -->
+					<li><a href="/"><i class="material-icons">input</i></a></li>
 				</ul>
 			</div>
 		</nav>
@@ -37,15 +41,29 @@
 					<a href="#!name"><span class="white-text name">Gasmyr</span></a> <a
 						href="#!email"><span class="white-text email">gasmyrmougang@gmail.com</span></a>
 				</div></li>
-			<li><a href="/departments" class="white-text"><i class="material-icons white-text">business</i>Departments</a></li>
-			<li><a href="/students" class="white-text"><i class="material-icons white-text">recent_actors</i>Students</a></li>
-			<li><a href="/teachers" class="white-text"><i class="material-icons white-text">contacts</i>Teachers</a></li>
-			<li><a href="/facilities" class="white-text"><i class="material-icons white-text">view_carousel</i>Facilities</a></li>
-			<li><a href="/planings" class="white-text"><i class="material-icons white-text">trending_up</i>Planing</a></li>
-			<li><a href="/settings" class="white-text"><i class="material-icons white-text">settings</i>Settings</a></li>
+			<li><a href="/departments" class="white-text"><i
+					class="material-icons white-text">business</i>Departments</a></li>
+			<li><a href="/fields" class="white-text"><i
+					class="material-icons white-text">view_stream</i>Fields</a></li>
+			<li><a href="/options" class="white-text"><i
+					class="material-icons white-text">view_column</i>Options</a></li>
+			<li><a href="/leves" class="white-text"><i
+					class="material-icons white-text">assessment</i>Levels</a></li>
+			<li><a href="/students" class="white-text"><i
+					class="material-icons white-text">recent_actors</i>Students</a></li>
+			<li><a href="/teachers" class="white-text"><i
+					class="material-icons white-text">contacts</i>Teachers</a></li>
+			<li><a href="/facilities" class="white-text"><i
+					class="material-icons white-text">view_carousel</i>Facilities</a></li>
+			<li><a href="/defenses" class="white-text"><i
+					class="material-icons white-text">trending_up</i>Defenses</a></li>
+			<li><a href="/juries" class="white-text"><i
+					class="material-icons white-text">assignment_ind</i>Juries</a></li>
 			<li><div class="divider"></div></li>
-			<li><a class="subheader">Additionnal section</a></li>
-			<li><a class="waves-effect white-text" href="/logout"><i
+			<li><a class="subheader">Additional section</a></li>
+			<li><a class="waves-effect white-text" href="/settings"><i
+					class="material-icons white-text">settings</i>Settings</a></li>
+			<li><a class="waves-effect white-text" href="/"><i
 					class="material-icons white-text">input</i>Logout</a></li>
 		</ul>
 		<a href="#" data-activates="slide-out" class="button-collapse"><i
@@ -60,7 +78,9 @@
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
 	<script type="text/javascript" src="../js/app.js"></script>
 	<div class="footer-copyright">
-		<div class="container .center-align"><i class="center">© 2017 Gasmyr Mougang</i></div>
+		<div class="container center-align">
+			<i class="center">© 2017 Gasmyr Mougang</i>
+		</div>
 	</div>
 </footer>
 </html>

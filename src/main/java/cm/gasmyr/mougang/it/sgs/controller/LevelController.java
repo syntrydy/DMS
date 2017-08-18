@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import cm.gasmyr.mougang.it.sgs.core.Level;
 import cm.gasmyr.mougang.it.sgs.impl.service.LevelService;
+import cm.gasmyr.mougang.it.sgs.impl.service.OptionService;
 @Controller
 public class LevelController {
 	
 	private LevelService levelService;
+	private OptionService optionService;
 
 	@Autowired
-	public LevelController(LevelService levelService) {
+	public LevelController(LevelService levelService,OptionService optionService) {
 		this.levelService = levelService;
+		this.optionService=optionService;
 	}
 	
 	@RequestMapping("/levels")
@@ -33,6 +36,7 @@ public class LevelController {
 	public String goToLevelEditPage(Model model, @PathVariable Long id) {
 		Level level = levelService.getById(id);
 		model.addAttribute("level", level);
+		model.addAttribute("options", optionService.getAll());
 		return "LevelEditPage";
 	}
 
@@ -54,6 +58,7 @@ public class LevelController {
 	@GetMapping(value = "/level")
 	public String gotoAddPage(Model model) {
 		model.addAttribute("level", new Level());
+		model.addAttribute("options", optionService.getAll());
 		return "LevelAddPage";
 	}
 

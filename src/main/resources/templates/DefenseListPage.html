@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="master :: app_header" />
+
+<body class="">
+	<div th:replace="master :: app_navbar"></div>
+
+	<div class="row card main">
+		<div class="col s12 m12">
+			<table class="table">
+				<thead class="myborderraduis">
+					<tr class="black-text">
+						<th>School Year</th>
+						<th>Date</th>
+						<th>DePartment</th>
+						<th>Field</th>
+						<th>Option</th>
+						<th>Level</th>
+						<th>Facility</th>
+						<th>Jury</th>
+						<th>Actions <a href="/defense"
+							class="btn btn-floating pulse addButton"><i
+								class="material-icons">add</i></a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="defense : ${defenses}">
+						<td th:text="${defense.schoolyear}"></td>
+						<td th:text="${defense.date}"></td>
+						<td th:text="${defense.getDepartmentName()}"></td>
+						<td th:text="${defense.getFieldName()}"></td>
+						<td th:text="${defense.getOptionName()}"></td>
+						<td th:text="${defense.getLevelName()}"></td>
+						<td th:text="${defense.getFacilityName()}"></td>
+						<td th:text="${defense.getJuryName()}"></td>
+						<td><a th:href="@{/edit_defense/{id}(id=${defense.id})}"><button
+									type="button" class="btn btn-primary">
+									<i class="material-icons left">edit</i>
+								</button></a> <a th:href="@{/delete_defense/{id}(id=${defense.id})}"><button
+									type="button" class="btn btn-danger">
+									<i class="material-icons left">delete</i>
+								</button></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+
+
+</body>
+<footer th:replace="master :: app_footer"></footer>
+</html>

@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="master :: app_header" />
+
+<body class="">
+	<div th:replace="master :: app_navbar"></div>
+
+	<div class="row card main">
+		<form class="col s10 m8 card-content" th:object="${level}"
+			method="post" th:action="@{{id}(id=${level.id})}">
+			<div class="row">
+				<div>
+					<select th:field="*{option}" class="browser-default">
+						<option th:each="o : ${options}" th:value="${o.id}"
+							th:text="${o.name}" th:selected="${o.id == level.option }" />
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s10 m8">
+					<input placeholder="Placeholder" id="first_name" type="text"
+						class="validate" th:field="*{name}" /> <label for="name">name</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s10 m8">
+					<input placeholder="Placeholder" id="fax" type="text"
+						class="validate" th:field="*{code}" /> <label for="fax">code</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s4 m4">
+					<a href="/levels"><button type="submit"
+							class="btn btn-lg back">
+							<i class="material-icons left">skip_previous</i>Back
+						</button></a>
+				</div>
+				<div class="input-field col s4 m4">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-lg back">
+							<i class="material-icons left">save</i>Save
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+
+
+
+
+
 
 </body>
+<footer th:replace="master :: app_footer"></footer>
 </html>

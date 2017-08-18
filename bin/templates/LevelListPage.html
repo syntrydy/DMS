@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="master :: app_header" />
+
+<body class="">
+	<div th:replace="master :: app_navbar"></div>
+
+	<div class="row card main">
+		<div class="col s12 m12">
+			<table class="table">
+				<thead class="myborderraduis">
+					<tr class="black-text">
+						<th>Name</th>
+						<th>Code</th>
+						<th>Option</th>
+						<th>Actions 
+						<a href="/level"
+							class="btn btn-floating pulse addButton"><i
+								class="material-icons">add</i></a></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="level : ${levels}">
+						<td th:text="${level.name}"></td>
+						<td th:text="${level.code}"></td>
+						<td th:text="${level.getOptionName()}"></td>
+						<td><a th:href="@{/edit_level/{id}(id=${level.id})}"><button
+									type="button" class="btn btn-primary">
+									<i class="material-icons left">edit</i>Modify
+								</button></a> <a th:href="@{/delete_level/{id}(id=${level.id})}"><button
+									type="button" class="btn btn-danger">
+									<i class="material-icons left">delete</i>Delete
+								</button></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+
+
+
 
 </body>
+<footer th:replace="master :: app_footer"></footer>
 </html>

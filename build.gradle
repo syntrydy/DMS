@@ -10,11 +10,22 @@ buildscript {
 	}
 }
 
+
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
-version = '0.0.1-SNAPSHOT'
+
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'cm.gasmyr.mougang.it.sgs.Application.class'
+    }
+}
+
+version = '1.0.1'
 sourceCompatibility = 1.8
 
 repositories {
@@ -25,8 +36,12 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.liquibase:liquibase-core')
+	compile('org.springframework.boot:spring-boot-starter-mail')
+	compile('org.xhtmlrenderer:flying-saucer-pdf:9.1.4')
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4')
 	runtime('org.springframework.boot:spring-boot-devtools')
 	runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')

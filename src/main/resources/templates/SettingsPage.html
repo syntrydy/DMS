@@ -42,21 +42,16 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s4 m4">
-					<a th:href="@{/edit_university/{id}(id=${university.id})}"><button
-							type="submit" class="btn btn-lg back">
-							<i class="material-icons left">edit</i>Edit
-						</button></a>
+					<a th:href="@{/edit_university/{id}(id=${university.id})}"
+						class="btn btn-lg back"><i class="material-icons left">edit</i>Edit</a>
 				</div>
 				<div class="input-field col s4 m4">
-					<a href="/departments"><button class="btn btn-lg back">
-							<i class="material-icons left">visibility</i>Show departments
-						</button></a>
+					<a href="/departments"
+						class="btn btn-lg back"><i class="material-icons left">visibility</i>Show departments</a>
 				</div>
 				<div class="input-field col s4 m4">
-					<button type="submit" class="btn btn-lg back">
-						<i class="material-icons left">add</i><a href="/add_department">Add
-							department </a>
-					</button>
+					<a href="/department"
+						class="btn btn-lg back"><i class="material-icons left">add</i>Add department</a>
 				</div>
 			</div>
 
