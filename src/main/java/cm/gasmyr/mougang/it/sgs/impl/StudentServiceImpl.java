@@ -23,12 +23,18 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void add(Student student) {
-		studentRepo.save(student);
+		if(student.getFname()!=null && student.getUsername()!=null){
+			studentRepo.save(student);
+		}
+		
 	}
 
 	@Override
 	public void delete(Student student) {
-		studentRepo.delete(student);
+		if(student.getId()!=null){
+			studentRepo.delete(student);
+		}
+		
 	}
 
 	@Override
@@ -38,9 +44,12 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public void update(Student student) {
-		Student optionToUpdate = studentRepo.getOne(student.getId());
-		optionToUpdate.updateInternal(student, student.getCni());
-		studentRepo.save(optionToUpdate);
+		if(student.getId()!=null){
+			Student optionToUpdate = studentRepo.getOne(student.getId());
+			optionToUpdate.updateInternal(student, student.getCni());
+			studentRepo.save(optionToUpdate);
+		}
+		
 	}
 
 	@Override

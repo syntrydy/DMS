@@ -23,7 +23,9 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	public void add(Department department) {
-		departmentRepo.save(department);
+		if(department.getName()!=null && department.getOwner()!=null){
+			departmentRepo.save(department);
+		}
 	}
 
 	@Override
@@ -38,9 +40,11 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	public void update(Department department) {
-		Department departmentToUpdate = departmentRepo.getOne(department.getId());
-		departmentToUpdate.updateInternal(department);
-		departmentRepo.save(departmentToUpdate);
+		if(department.getName()!=null && department.getOwner()!=null){
+			Department departmentToUpdate = departmentRepo.getOne(department.getId());
+			departmentToUpdate.updateInternal(department);
+			departmentRepo.save(departmentToUpdate);
+		}
 	}
 
 	@Override

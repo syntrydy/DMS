@@ -23,24 +23,36 @@ public class TeacherServiceImpl implements TeacherService {
 
 	@Override
 	public void add(Teacher teacher) {
-		teacherRepo.save(teacher);
+		if(teacher.getUsername()!=null && teacher.getFname()!=null){
+			teacherRepo.save(teacher);
+		}
+		
 	}
 
 	@Override
 	public void delete(Teacher teacher) {
-		teacherRepo.delete(teacher);
+		if(teacher.getId()!=null){
+			teacherRepo.delete(teacher);
+		}
+		
 	}
 
 	@Override
 	public void delete(Long id) {
-		teacherRepo.delete(id);
+		if(id!=null){
+			teacherRepo.delete(id);
+		}
+		
 	}
 
 	@Override
 	public void update(Teacher teacher) {
-		Teacher optionToUpdate = teacherRepo.getOne(teacher.getId());
-		optionToUpdate.updateInternal(teacher,teacher.getAddress(),teacher.getTitle());
-		teacherRepo.save(optionToUpdate);
+		if(teacher.getId()!=null){
+			Teacher optionToUpdate = teacherRepo.getOne(teacher.getId());
+			optionToUpdate.updateInternal(teacher, teacher.getAddress(), teacher.getTitle());
+			teacherRepo.save(optionToUpdate);
+		}
+		
 	}
 
 	@Override

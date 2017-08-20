@@ -12,9 +12,8 @@ import cm.gasmyr.mougang.it.sgs.impl.service.FacilityService;
 import cm.gasmyr.mougang.it.sgs.repository.FacilityRepo;
 
 @Service
-public class FacilityServiceImpl implements FacilityService{
+public class FacilityServiceImpl implements FacilityService {
 
-	
 	FacilityRepo facilityRepo;
 
 	@Autowired
@@ -24,24 +23,32 @@ public class FacilityServiceImpl implements FacilityService{
 
 	@Override
 	public void add(Facility facility) {
-		facilityRepo.save(facility);		
+		if (facility.getName() != null) {
+			facilityRepo.save(facility);
+		}
 	}
 
 	@Override
 	public void delete(Facility facility) {
-		facilityRepo.delete(facility);		
+		if (facility != null) {
+			facilityRepo.delete(facility);
+		}
+
 	}
 
 	@Override
 	public void delete(Long id) {
-		facilityRepo.delete(id);		
+		facilityRepo.delete(id);
 	}
 
 	@Override
 	public void update(Facility facility) {
-		Facility facilityToUpdate = facilityRepo.getOne(facility.getId());
-		facilityToUpdate.updateInternal(facility);
-		facilityRepo.save(facilityToUpdate);		
+		if (facility.getName() != null) {
+			Facility facilityToUpdate = facilityRepo.getOne(facility.getId());
+			facilityToUpdate.updateInternal(facility);
+			facilityRepo.save(facilityToUpdate);
+		}
+
 	}
 
 	@Override

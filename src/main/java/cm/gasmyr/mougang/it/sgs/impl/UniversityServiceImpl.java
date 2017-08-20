@@ -24,24 +24,36 @@ public class UniversityServiceImpl implements UniversityService {
 
 	@Override
 	public void add(University university) {
-		universityRepo.save(university);
+		if(university.getName()!=null){
+			universityRepo.save(university);
+		}
+		
 	}
 
 	@Override
 	public void delete(University university) {
-		universityRepo.delete(university);
+		if(university.getId()!=null){
+			universityRepo.delete(university);
+		}
+		
 	}
 
 	@Override
 	public void delete(Long id) {
-		universityRepo.delete(id);
+		if(id!=null){
+			universityRepo.delete(id);
+		}
+		
 	}
 
 	@Override
 	public void update(University university) {
-		University taskToUpdate = universityRepo.getOne(university.getId());
-		taskToUpdate.updateInternal(university);
-		universityRepo.save(taskToUpdate);
+		if(university.getId()!=null){
+			University taskToUpdate = universityRepo.getOne(university.getId());
+			taskToUpdate.updateInternal(university);
+			universityRepo.save(taskToUpdate);
+		}
+		
 	}
 
 	@Override

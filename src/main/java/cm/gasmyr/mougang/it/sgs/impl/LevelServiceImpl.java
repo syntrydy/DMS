@@ -23,24 +23,34 @@ public class LevelServiceImpl implements LevelService {
 
 	@Override
 	public void add(Level level) {
-		levelRepo.save(level);
+		if (level.getCode() != null && level.getName() != null) {
+			levelRepo.save(level);
+		}
 	}
 
 	@Override
 	public void delete(Level level) {
-		levelRepo.delete(level);
+		if (level.getId() != null) {
+			levelRepo.delete(level);
+		}
+
 	}
 
 	@Override
 	public void delete(Long id) {
-		levelRepo.delete(id);
+		if (id != null) {
+			levelRepo.delete(id);
+		}
 	}
 
 	@Override
 	public void update(Level level) {
-		Level levelToUpdate = levelRepo.getOne(level.getId());
-		levelToUpdate.updateInternal(level);
-		levelRepo.save(levelToUpdate);
+		if (level.getId() != null) {
+			Level levelToUpdate = levelRepo.getOne(level.getId());
+			levelToUpdate.updateInternal(level);
+			levelRepo.save(levelToUpdate);
+		}
+
 	}
 
 	@Override

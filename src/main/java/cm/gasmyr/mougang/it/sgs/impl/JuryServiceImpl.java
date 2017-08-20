@@ -22,12 +22,18 @@ public class JuryServiceImpl implements JuryService {
 
 	@Override
 	public void add(Jury jury) {
-		juryRepo.save(jury);
+		if (jury.getName() != null) {
+			juryRepo.save(jury);
+		}
+
 	}
 
 	@Override
 	public void delete(Jury jury) {
-		juryRepo.delete(jury);
+		if (jury.getId() != null) {
+			juryRepo.delete(jury);
+		}
+
 	}
 
 	@Override
@@ -37,9 +43,12 @@ public class JuryServiceImpl implements JuryService {
 
 	@Override
 	public void update(Jury jury) {
-		Jury optionToUpdate = juryRepo.getOne(jury.getId());
-		optionToUpdate.updateInternal(jury);
-		juryRepo.save(optionToUpdate);
+		if (jury.getId() != null) {
+			Jury optionToUpdate = juryRepo.getOne(jury.getId());
+			optionToUpdate.updateInternal(jury);
+			juryRepo.save(optionToUpdate);
+		}
+
 	}
 
 	@Override

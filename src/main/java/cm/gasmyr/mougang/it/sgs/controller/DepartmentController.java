@@ -64,8 +64,10 @@ public class DepartmentController {
 	}
 
 	@RequestMapping(value = "/department", method = RequestMethod.POST)
-	public String saveDepartment(@Valid Department option, BindingResult bindingResult, Model model) {
-		departmentService.add(option);
+	public String saveDepartment(@Valid Department department, BindingResult bindingResult, Model model) {
+		if(department.getName()!=null){
+			departmentService.add(department);
+		}
 		return "redirect:/departments";
 	}
 

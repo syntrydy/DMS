@@ -13,7 +13,7 @@ import cm.gasmyr.mougang.it.sgs.impl.service.OptionService;
 import cm.gasmyr.mougang.it.sgs.repository.OptionRepo;
 
 @Service
-public class OptionServiceImpl implements OptionService{
+public class OptionServiceImpl implements OptionService {
 
 	OptionRepo optionRepo;
 
@@ -21,27 +21,38 @@ public class OptionServiceImpl implements OptionService{
 	public OptionServiceImpl(OptionRepo optionRepo) {
 		this.optionRepo = optionRepo;
 	}
-	
+
 	@Override
 	public void add(Option option) {
-		optionRepo.save(option);
+		if (option.getField() != null && option.getName() != null) {
+			optionRepo.save(option);
+		}
+
 	}
 
 	@Override
 	public void delete(Option option) {
-		optionRepo.delete(option);		
+		if (option.getId() != null) {
+			optionRepo.delete(option);
+		}
+
 	}
 
 	@Override
 	public void delete(Long id) {
-		optionRepo.delete(id);		
+		if (id != null) {
+			optionRepo.delete(id);
+		}
 	}
 
 	@Override
 	public void update(Option option) {
-		Option optionToUpdate = optionRepo.getOne(option.getId());
-		optionToUpdate.updateInternal(option);
-		optionRepo.save(optionToUpdate);
+		if (option.getId() != null) {
+			Option optionToUpdate = optionRepo.getOne(option.getId());
+			optionToUpdate.updateInternal(option);
+			optionRepo.save(optionToUpdate);
+		}
+
 	}
 
 	@Override

@@ -23,12 +23,18 @@ public class FieldServiceImpl implements FieldService {
 
 	@Override
 	public void add(Field field) {
-		fieldRepo.save(field);
+		if (field.getDepartment() != null && field.getName() != null) {
+			fieldRepo.save(field);
+		}
+
 	}
 
 	@Override
 	public void delete(Field field) {
-		fieldRepo.delete(field);
+		if (field.getDepartment() != null && field.getName() != null) {
+			fieldRepo.delete(field);
+		}
+
 	}
 
 	@Override
@@ -38,9 +44,12 @@ public class FieldServiceImpl implements FieldService {
 
 	@Override
 	public void update(Field field) {
-		Field fieldToUpdate = fieldRepo.getOne(field.getId());
-		fieldToUpdate.updateInternal(field);
-		fieldRepo.save(fieldToUpdate);
+		if (field.getDepartment() != null && field.getName() != null) {
+			Field fieldToUpdate = fieldRepo.getOne(field.getId());
+			fieldToUpdate.updateInternal(field);
+			fieldRepo.save(fieldToUpdate);
+		}
+
 	}
 
 	@Override
